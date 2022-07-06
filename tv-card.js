@@ -4,35 +4,32 @@ const LitElement = Object.getPrototypeOf(
 const html = LitElement.prototype.html;
 
 import * as mdiIcons from "https://unpkg.com/@mdi/js@6.4.95/mdi.js?module";
-
 const keys = {
-    "power": {"key": "KEY_POWER", "icon": "mdiPower"},
-    "volume_up": {"key": "KEY_VOLUP", "icon": "mdiVolumePlus"},
-    "volume_down": {"key": "KEY_VOLDOWN", "icon": "mdiVolumeMinus"},
-    "volume_mute": {"key": "KEY_MUTE", "icon": "mdiVolumeMute"},
-    "return": {"key": "KEY_RETURN", "icon": "mdiArrowLeft"},
+    "power": {"key": "POWER", "icon": "mdiPower"},
+    "volume_up": {"key": "VOLUME_UP", "icon": "mdiVolumePlus"},
+    "volume_down": {"key": "VOLUME_DOWN", "icon": "mdiVolumeMinus"},
+    "volume_mute": {"key": "MUTE", "icon": "mdiVolumeMute"},
+    "return": {"key": "BACK", "icon": "mdiArrowLeft"},
     "source": {"key": "KEY_SOURCE", "icon": "mdiVideoInputHdmi"},
     "info": {"key": "KEY_INFO", "icon": "mdiTelevisionGuide"},
-    "home": {"key": "KEY_HOME", "icon": "mdiHome"},
+    "home": {"key": "HOME", "icon": "mdiHome"},
     "channel_up": {"key": "KEY_CHUP", "icon": "mdiArrowUp"},
     "channel_down": {"key": "KEY_CHDOWN", "icon": "mdiArrowDown"},
-    "up": {"key": "KEY_UP", "icon": "mdiChevronUp"},
-    "left": {"key": "KEY_LEFT", "icon": "mdiChevronLeft"},
-    "enter": {"key": "KEY_ENTER", "icon": "mdiCheckboxBlankCircle"},
-    "right": {"key": "KEY_RIGHT", "icon": "mdiChevronRight"},
-    "down": {"key": "KEY_DOWN", "icon": "mdiChevronDown"},
-    "rewind": {"key": "KEY_REWIND", "icon": "mdiRewind"},
-    "play": {"key": "KEY_PLAY", "icon": "mdiPlay"},
+    "up": {"key": "UP", "icon": "mdiChevronUp"},
+    "left": {"key": "LEFT", "icon": "mdiChevronLeft"},
+    "enter": {"key": "CENTER", "icon": "mdiCheckboxBlankCircle"},
+    "right": {"key": "RIGHT", "icon": "mdiChevronRight"},
+    "down": {"key": "DOWN", "icon": "mdiChevronDown"},
+    "rewind": {"key": "REWIND", "icon": "mdiRewind"},
+    "play": {"key": "RESUME", "icon": "mdiPlay"},
     "pause": {"key": "KEY_PAUSE", "icon": "mdiPause"},
-    "fast_forward": {"key": "KEY_FF", "icon": "mdiFastForward"},
+    "fast_forward": {"key": "FAST_FORWARD", "icon": "mdiFastForward"},
 };
-
 const sources = {
     "netflix": {"source": "Netflix", "icon": "mdiNetflix"},
     "spotify": {"source": "Spotify", "icon": "mdiSpotify"},
     "youtube": {"source": "YouTube", "icon": "mdiYoutube"},
 };
-
 var custom_keys = {};
 var custom_sources = {};
 var custom_icons = {};
@@ -80,11 +77,9 @@ class TVCardServices extends LitElement {
         custom_keys = config.custom_keys || {};
         custom_sources = config.custom_sources || {};
         custom_icons = config.custom_icons || {};
-
         this.loadCardHelpers();
         this.renderVolumeSlider();
     }
-
     isButtonEnabled(row, button) {
         if (!(this._config[row] instanceof Array)) return false;
 
@@ -113,10 +108,10 @@ class TVCardServices extends LitElement {
             await new Promise((resolve) => (this._hassResolve = resolve));
         this._helpersResolve = undefined;
         this._hassResolve = undefined;
-
+        let entity_id = (this._config.volume_entity === undefined) ? this._config.entity : this._config.volume_entity;
         let slider_config = {
             "type": "custom:my-slider",
-            "entity": "media_player.tv",
+            "entity": entity_id,
             "height": "50px",
             "mainSliderColor": "white",
             "secondarySliderColor": "rgb(60, 60, 60)",
@@ -147,9 +142,8 @@ class TVCardServices extends LitElement {
     sendKey(key) {
         let entity_id = this._config.entity;
 
-        this._hass.callService("media_player", "play_media", {
-            media_content_id: key,
-            media_content_type: "send_key",
+        this._hass.callService("androidtv", "adb_command", {
+            command: key
         }, { entity_id: entity_id });
     }
 
@@ -165,7 +159,7 @@ class TVCardServices extends LitElement {
     onClick(event) {
         event.stopImmediatePropagation();
         let click_action = () => {
-            this.sendKey("KEY_ENTER");
+            this.sendKey("CENTER");
             if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
         };
         if (this._config.enable_double_click) {
@@ -183,14 +177,14 @@ class TVCardServices extends LitElement {
         clearTimeout(timer);
         timer = null;
 
-        this.sendKey(this._config.double_click_keycode ? this._config.double_click_keycode : "KEY_RETURN");
+        this.sendKey(this._config.double_click_keycode ? this._config.double_click_keycode : "BACK");
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "success");
     }
 
     onTouchStart(event) {
         event.stopImmediatePropagation();
 
-        holdaction = "KEY_ENTER";
+        holdaction = "CENTER";
         holdtimer = setTimeout(() => {
             //hold
             holdinterval = setInterval(() => {
@@ -226,12 +220,12 @@ class TVCardServices extends LitElement {
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
-            let key = diffX > 0 ? "KEY_LEFT" : "KEY_RIGHT";
+            let key = diffX > 0 ? "LEFT" : "RIGHT";
             holdaction = key;
             this.sendKey(key);
         } else {
             // sliding vertically
-            let key = diffY > 0 ? "KEY_UP" : "KEY_DOWN";
+            let key = diffY > 0 ? "UP" : "DOWN";
             holdaction = key;
             this.sendKey(key);
         }
