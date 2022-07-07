@@ -51,7 +51,8 @@ class TVCardServices extends LitElement {
             return;
         }
         if (!config.platform) {
-            config.platform = "samsungtv";
+            console.log("Invalid cconfiguration platform");
+            return;
         }
         this._config = { theme: "default", ...config };
         custom_keys = config.custom_keys || {};
