@@ -75,7 +75,6 @@ class TVCardServices extends LitElement {
                 "fast_forward": {"key": "FAST_FORWARD", "icon": "mdi:fast-forward"},
                 "menu": {"key": "MENU", "icon": "mdi:menu"},
                 "settings": {"key": "SETTINGS", "icon": "mdi:cog"},
-                
             };
         }
         else {
