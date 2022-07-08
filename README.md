@@ -265,6 +265,7 @@ Buttons, buttons everywhere!
 ```yaml
 type: custom:tv-card
 entity: media_player.tv
+platform: samsungtv
 title: Example 2
 power_row:
   - power
@@ -300,6 +301,7 @@ Using less
 ```yaml
 type: custom:tv-card
 entity: media_player.tv
+platform: samsungtv
 title: Example 3
 power_row:
   - power
