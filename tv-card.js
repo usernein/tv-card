@@ -78,6 +78,28 @@ class TVCardServices extends LitElement {
                 "settings": {"key": "SETTINGS", "icon": "mdi:cog"},
             };
         }
+        else if (config.platform === "webostv" ) {
+            this.keys = {
+                "volume_up": {"key": "VOLUMEUP", "icon": "mdi:volume-plus"},
+                "volume_down": {"key": "VOLUMEDOWN", "icon": "mdi:volume-minus"},
+                "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
+                "return": {"key": "BACK", "icon": "mdi:arrow-left"},
+                "info": {"key": "INFO", "icon": "mdi:information"},
+                "home": {"key": "HOME", "icon": "mdi:home"},
+                "channel_up": {"key": "CHANNELUP", "icon": "mdi:arrow-up"},
+                "channel_down": {"key": "CHANNELDOWN", "icon": "mdi:arrow-down"},
+                "up": {"key": "UP", "icon": "mdi:chevron-up"},
+                "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
+                "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
+                "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
+                "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
+                "play": {"key": "PLAY", "icon": "mdi:play"},
+                "pause": {"key": "PAUSE", "icon": "mdi:pause"},
+                "menu": {"key": "MENU", "icon": "mdi:menu"},
+                "guide": {"key": "GUIDE", "icon": "mdi:television-guide"},
+                "exit": {"key": "EXIT", "icon": "mdi:close"},
+            };
+        }
         else {
             this.keys = {
                 "power": {"key": "KEY_POWER", "icon": "mdi:power"},
@@ -169,6 +191,11 @@ class TVCardServices extends LitElement {
         if (this._config.platform === "androidtv") {
             this._hass.callService("androidtv", "adb_command", {
                 command: key
+            }, { entity_id: entity_id });
+        }
+        else if (this._config.platform === "webostv") {
+            this._hass.callService("webostv", "button", {
+                button: key
             }, { entity_id: entity_id });
         }
         else {
