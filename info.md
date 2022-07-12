@@ -11,6 +11,7 @@ Add this to your lovelace configuration if your tv is a Samsung Smart TV:
 type: custom:tv-card
 entity: media_player.tv
 title: Example 2
+platform: samsungtv
 power_row:
   - power
 channel_row:

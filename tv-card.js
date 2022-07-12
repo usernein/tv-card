@@ -2,29 +2,6 @@ const LitElement = Object.getPrototypeOf(
     customElements.get("ha-panel-lovelace")
 );
 const html = LitElement.prototype.html;
-
-const keys = {
-    "power": {"key": "KEY_POWER", "icon": "mdi:power"},
-    "volume_up": {"key": "KEY_VOLUP", "icon": "mdi:volume-plus"},
-    "volume_down": {"key": "KEY_VOLDOWN", "icon": "mdi:volume-minus"},
-    "volume_mute": {"key": "KEY_MUTE", "icon": "mdi:volume-mute"},
-    "return": {"key": "KEY_RETURN", "icon": "mdi:arrow-left"},
-    "source": {"key": "KEY_SOURCE", "icon": "mdi:video-input-hdmi"},
-    "info": {"key": "KEY_INFO", "icon": "mdi:television-guide"},
-    "home": {"key": "KEY_HOME", "icon": "mdi:home"},
-    "channel_up": {"key": "KEY_CHUP", "icon": "mdi:arrow-up"},
-    "channel_down": {"key": "KEY_CHDOWN", "icon": "mdi:arrow-down"},
-    "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
-    "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
-    "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
-    "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
-    "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
-    "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
-    "play": {"key": "KEY_PLAY", "icon": "mdi:play"},
-    "pause": {"key": "KEY_PAUSE", "icon": "mdi:pause"},
-    "fast_forward": {"key": "KEY_FF", "icon": "mdi:fast-forward"},
-};
-
 const sources = {
     "netflix": {"source": "Netflix", "icon": "mdi:netflix"},
     "spotify": {"source": "Spotify", "icon": "mdi:spotify"},
@@ -78,16 +55,85 @@ class TVCardServices extends LitElement {
             console.log("Invalid configuration");
             return;
         }
-
+        if (!config.platform) {
+            console.log("Invalid configuration platform");
+            return;
+        }
         this._config = { theme: "default", ...config };
+
+        if (config.platform === "androidtv" ) {
+            this.keys = {
+                "power": {"key": "POWER", "icon": "mdi:power"},
+                "volume_up": {"key": "VOLUME_UP", "icon": "mdi:volume-plus"},
+                "volume_down": {"key": "VOLUME_DOWN", "icon": "mdi:volume-minus"},
+                "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
+                "return": {"key": "BACK", "icon": "mdi:arrow-left"},
+                "home": {"key": "HOME", "icon": "mdi:home"},
+                "up": {"key": "UP", "icon": "mdi:chevron-up"},
+                "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
+                "enter": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
+                "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
+                "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
+                "rewind": {"key": "REWIND", "icon": "mdi:rewind"},
+                "play": {"key": "RESUME", "icon": "mdi:play"},
+                "fast_forward": {"key": "FAST_FORWARD", "icon": "mdi:fast-forward"},
+                "menu": {"key": "MENU", "icon": "mdi:menu"},
+                "settings": {"key": "SETTINGS", "icon": "mdi:cog"},
+            };
+        }
+        else if (config.platform === "webostv" ) {
+            this.keys = {
+                "volume_up": {"key": "VOLUMEUP", "icon": "mdi:volume-plus"},
+                "volume_down": {"key": "VOLUMEDOWN", "icon": "mdi:volume-minus"},
+                "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
+                "return": {"key": "BACK", "icon": "mdi:arrow-left"},
+                "info": {"key": "INFO", "icon": "mdi:information"},
+                "home": {"key": "HOME", "icon": "mdi:home"},
+                "channel_up": {"key": "CHANNELUP", "icon": "mdi:arrow-up"},
+                "channel_down": {"key": "CHANNELDOWN", "icon": "mdi:arrow-down"},
+                "up": {"key": "UP", "icon": "mdi:chevron-up"},
+                "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
+                "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
+                "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
+                "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
+                "play": {"key": "PLAY", "icon": "mdi:play"},
+                "pause": {"key": "PAUSE", "icon": "mdi:pause"},
+                "menu": {"key": "MENU", "icon": "mdi:menu"},
+                "guide": {"key": "GUIDE", "icon": "mdi:television-guide"},
+                "exit": {"key": "EXIT", "icon": "mdi:close"},
+            };
+        }
+        else {
+            this.keys = {
+                "power": {"key": "KEY_POWER", "icon": "mdi:power"},
+                "volume_up": {"key": "KEY_VOLUP", "icon": "mdi:volume-plus"},
+                "volume_down": {"key": "KEY_VOLDOWN", "icon": "mdi:volume-minus"},
+                "volume_mute": {"key": "KEY_MUTE", "icon": "mdi:volume-mute"},
+                "return": {"key": "KEY_RETURN", "icon": "mdi:arrow-left"},
+                "source": {"key": "KEY_SOURCE", "icon": "mdi:video-input-hdmi"},
+                "info": {"key": "KEY_INFO", "icon": "mdi:television-guide"},
+                "home": {"key": "KEY_HOME", "icon": "mdi:home"},
+                "channel_up": {"key": "KEY_CHUP", "icon": "mdi:arrow-up"},
+                "channel_down": {"key": "KEY_CHDOWN", "icon": "mdi:arrow-down"},
+                "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
+                "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
+                "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
+                "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
+                "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
+                "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
+                "play": {"key": "KEY_PLAY", "icon": "mdi:play"},
+                "pause": {"key": "KEY_PAUSE", "icon": "mdi:pause"},
+                "fast_forward": {"key": "KEY_FF", "icon": "mdi:fast-forward"},
+            };
+        }
+
         this.custom_keys = config.custom_keys || {};
         this.custom_sources = config.custom_sources || {};
         this.custom_icons = config.custom_icons || {};
-
+        
         this.loadCardHelpers();
         this.renderVolumeSlider();
     }
-
     isButtonEnabled(row, button) {
         if (!(this._config[row] instanceof Array)) return false;
 
@@ -116,10 +162,10 @@ class TVCardServices extends LitElement {
             await new Promise((resolve) => (this._hassResolve = resolve));
         this._helpersResolve = undefined;
         this._hassResolve = undefined;
-
+        let entity_id = (this._config.volume_entity === undefined) ? this._config.entity : this._config.volume_entity;
         let slider_config = {
             "type": "custom:my-slider",
-            "entity": this._config.entity,
+            "entity": entity_id,
             "height": "50px",
             "mainSliderColor": "white",
             "secondarySliderColor": "rgb(60, 60, 60)",
@@ -150,11 +196,22 @@ class TVCardServices extends LitElement {
 
     sendKey(key) {
         let entity_id = this._config.entity;
-
-        this._hass.callService("media_player", "play_media", {
-            media_content_id: key,
-            media_content_type: "send_key",
-        }, { entity_id: entity_id });
+        if (this._config.platform === "androidtv") {
+            this._hass.callService("androidtv", "adb_command", {
+                command: key
+            }, { entity_id: entity_id });
+        }
+        else if (this._config.platform === "webostv") {
+            this._hass.callService("webostv", "button", {
+                button: key
+            }, { entity_id: entity_id });
+        }
+        else {
+            this._hass.callService("media_player", "play_media", {
+                media_content_id: key,
+                media_content_type: "send_key",
+            }, { entity_id: entity_id });
+        }
     }
 
     changeSource(source) {
@@ -169,9 +226,9 @@ class TVCardServices extends LitElement {
     onClick(event) {
         event.stopImmediatePropagation();
         let click_action = () => {
-            this.sendKey("KEY_ENTER");
+            this.sendKey(this.keys.enter.key);
             if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
-        };
+        };  
         if (this._config.enable_double_click) {
             this.timer = setTimeout(click_action, 200);
         } else {
@@ -187,15 +244,16 @@ class TVCardServices extends LitElement {
         clearTimeout(this.timer);
         this.timer = null;
 
-        this.sendKey(this._config.double_click_keycode ? this._config.double_click_keycode : "KEY_RETURN");
+        this.sendKey(this._config.double_click_keycode ? this._config.double_click_keycode : this.keys.return.key);
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "success");
     }
 
     onTouchStart(event) {
         event.stopImmediatePropagation();
 
-        this.holdaction = "KEY_ENTER";
+        this.holdaction = this.keys.enter.key;
         this.holdtimer = setTimeout(() => {
+
             //hold
             this.holdinterval = setInterval(() => {
                 this.sendKey(this.holdaction);
@@ -230,13 +288,15 @@ class TVCardServices extends LitElement {
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
-            let key = diffX > 0 ? "KEY_LEFT" : "KEY_RIGHT";
+
+            let key = diffX > 0 ? this.keys.left.key : this.keys.right.key;
             this.holdaction = key;
             this.sendKey(key);
         } else {
             // sliding vertically
-            let key = diffY > 0 ? "KEY_UP" : "KEY_DOWN";
+            let key = diffY > 0 ? this.keys.up.key : this.keys.down.key;
             this.holdaction = key;
+
             this.sendKey(key);
         }
 
@@ -247,7 +307,8 @@ class TVCardServices extends LitElement {
 
     handleActionClick(e) {
         let action = e.currentTarget.action;
-        let info = this.custom_keys[action] || this.custom_sources[action] || keys[action] || sources[action];
+
+        let info = this.custom_keys[action] || this.custom_sources[action] || this.keys[action] || sources[action];
 
         if (info.key) {
             this.sendKey(info.key);
@@ -264,7 +325,8 @@ class TVCardServices extends LitElement {
     }
 
     buildIconButton(action) {
-        let button_info = this.custom_keys[action] || this.custom_sources[action] || keys[action] || sources[action] || {};
+        let button_info = this.custom_keys[action] || this.custom_sources[action] || this.keys[action] || sources[action] || {};
+
         let icon = button_info.icon;
         let custom_svg_path = this.custom_icons[icon];
 

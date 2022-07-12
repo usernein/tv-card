@@ -14,6 +14,8 @@
 - Fully functional touchpad for navigation (thanks to [iablon's Touchpad Card](https://github.com/iablon/HomeAssistant-Touchpad-Card)) ❤️
 - Slider for volume (thanks to [AnthonMS's Slider Card](https://github.com/AnthonMS/my-cards#slider-card)) ❤️
 - Supports [ollo69's SamsungTV Smart Component](https://github.com/ollo69/ha-samsungtv-smart)
+- Supports [LG webOS Smart TV](https://www.home-assistant.io/integrations/webostv/)
+- Supports [Android TV](https://www.home-assistant.io/integrations/androidtv/)
 - Much easier setup
 - Implements haptics feedback
 - Customizable layout, you can choose the order of the rows and buttons
@@ -29,6 +31,8 @@
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `custom:tv-card`
 | entity | string | **Required** | The `media_player` entity to control
+| platform | string | **Required** | Platform of `media_player` supported values `samsungtv`, `androidtv`, `webostv`
+| volume_entity | string | **Optional** | The `media_player` entity for volume control working only with volume_row: `slider`
 | title | string | **Optional** | Card title for showing as header
 | enable_double_click | boolean | **Optional** | Whether a double click on the touchpad should send the key in `double_click_keycode`. Defaults to `true`.
 | double_click_keycode | string | **Optional** | The key for double clicks on the touchpad. Defaults to `KEY_RETURN`
@@ -64,7 +68,7 @@ There also `volume_row` and `navigation_row`, but these requires a string as val
 
 This card uses `media_player.play_media` to send keys to the TV.
 This is the way [ollo69's SamsungTV Smart Component](https://github.com/ollo69/ha-samsungtv-smart) (which i based this card on) works, but don't worry: if your TV is from another brand or simply the TV integration does not use `media_player.play_media` for sending keys, you can still use this card by setting [custom buttons](#custom-buttons) with services to send keys to your TV (or do whatever you want) in your way (just like the original [tv-card](https://github.com/marrobHD/tv-card)).
-
+Platform `webostv` doesn't support power key [webOS Integration](https://www.home-assistant.io/integrations/webostv/#turn-on-action)
 ## Custom buttons
 
 If you want to add custom buttons to the remote control (of if you want to reconfigure the existing buttons), you can do it by adding an object to the `custom_keys` option:
@@ -223,6 +227,7 @@ Playing with order, moving and repeating buttons:
 ```yaml
 type: custom:tv-card
 entity: media_player.tv
+platform: samsungtv
 title: Example 1
 power_row:
   - power
@@ -260,6 +265,7 @@ Buttons, buttons everywhere!
 ```yaml
 type: custom:tv-card
 entity: media_player.tv
+platform: samsungtv
 title: Example 2
 power_row:
   - power
@@ -295,6 +301,7 @@ Using less
 ```yaml
 type: custom:tv-card
 entity: media_player.tv
+platform: samsungtv
 title: Example 3
 power_row:
   - power
