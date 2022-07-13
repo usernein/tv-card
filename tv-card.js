@@ -2,6 +2,7 @@ const LitElement = Object.getPrototypeOf(
     customElements.get("ha-panel-lovelace")
 );
 const html = LitElement.prototype.html;
+
 const sources = {
     "netflix": {"source": "Netflix", "icon": "mdi:netflix"},
     "spotify": {"source": "Spotify", "icon": "mdi:spotify"},
@@ -53,10 +54,6 @@ class TVCardServices extends LitElement {
     setConfig(config) {
         if (!config.entity) {
             console.log("Invalid configuration");
-            return;
-        }
-        if (!config.platform) {
-            console.log("Invalid configuration platform");
             return;
         }
         this._config = { theme: "default", ...config };
@@ -162,10 +159,11 @@ class TVCardServices extends LitElement {
             await new Promise((resolve) => (this._hassResolve = resolve));
         this._helpersResolve = undefined;
         this._hassResolve = undefined;
-        let entity_id = (this._config.volume_entity === undefined) ? this._config.entity : this._config.volume_entity;
+
+        let volume_entity = (this._config.volume_entity === undefined) ? this._config.entity : this._config.volume_entity;
         let slider_config = {
             "type": "custom:my-slider",
-            "entity": entity_id,
+            "entity": volume_entity,
             "height": "50px",
             "mainSliderColor": "white",
             "secondarySliderColor": "rgb(60, 60, 60)",
@@ -217,6 +215,7 @@ class TVCardServices extends LitElement {
     changeSource(source) {
         let entity_id = this._config.entity;
 
+        // supported by androidtv, samsungtv (i'm not sure about webostv)
         this._hass.callService("media_player", "select_source", {
             source: source,
             entity_id: entity_id,
