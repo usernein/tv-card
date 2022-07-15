@@ -32,7 +32,7 @@
 | type | string | **Required** | `custom:tv-card`
 | entity | string | **Required** | The `media_player` entity to control.
 | platform | string | **Optional** | Platform of `media_player`. Supported values: `samsungtv`, `androidtv`, `webostv`, `roku`. If empty, it will use the keycodes for `samsungtv`.
-| remote_entity | string | **Required*** | The remote entity that controls the Roku `media_player`. Required only for `platform` type `roku`.
+| remote_entity | string | **Optional** | The remote entity that controls the Roku `media_player`. Defaults to `remote.{{entity_id}}`.
 | volume_entity | string | **Optional** | The `media_player` entity for volume control (working only with volume_row: `slider`). Defaults to the same in `entity`.
 | title | string | **Optional** | Card title for showing as header.
 | enable_double_click | boolean | **Optional** | Whether a double click on the touchpad should send the key in `double_click_keycode`. Defaults to `true`.

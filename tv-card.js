@@ -103,11 +103,7 @@ class TVCardServices extends LitElement {
                 break;
             }
             case "roku": {
-                if (!config.remote_entity) {
-                    console.log("Invalid configuration. Must specify a remote_entity for platform type 'roku'.");
-                    return;
-                }
-                let remote_entity = config.remote_entity;
+                let remote_entity = !config.remote_entity ? "remote." + config.entity.split(".")[1] : config.remote_entity;
                 this.keys = {
                     "power": {"icon": "mdi:power", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "power"}},
                     "volume_up": {"icon": "mdi:volume-plus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "volume_up"}},
