@@ -57,71 +57,98 @@ class TVCardServices extends LitElement {
             return;
         }
         this._config = { theme: "default", ...config };
-
-        if (config.platform === "androidtv" ) {
-            this.keys = {
-                "power": {"key": "POWER", "icon": "mdi:power"},
-                "volume_up": {"key": "VOLUME_UP", "icon": "mdi:volume-plus"},
-                "volume_down": {"key": "VOLUME_DOWN", "icon": "mdi:volume-minus"},
-                "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
-                "return": {"key": "BACK", "icon": "mdi:arrow-left"},
-                "home": {"key": "HOME", "icon": "mdi:home"},
-                "up": {"key": "UP", "icon": "mdi:chevron-up"},
-                "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
-                "enter": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
-                "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
-                "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
-                "rewind": {"key": "REWIND", "icon": "mdi:rewind"},
-                "play": {"key": "RESUME", "icon": "mdi:play"},
-                "fast_forward": {"key": "FAST_FORWARD", "icon": "mdi:fast-forward"},
-                "menu": {"key": "MENU", "icon": "mdi:menu"},
-                "settings": {"key": "SETTINGS", "icon": "mdi:cog"},
-            };
-        }
-        else if (config.platform === "webostv" ) {
-            this.keys = {
-                "volume_up": {"key": "VOLUMEUP", "icon": "mdi:volume-plus"},
-                "volume_down": {"key": "VOLUMEDOWN", "icon": "mdi:volume-minus"},
-                "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
-                "return": {"key": "BACK", "icon": "mdi:arrow-left"},
-                "info": {"key": "INFO", "icon": "mdi:information"},
-                "home": {"key": "HOME", "icon": "mdi:home"},
-                "channel_up": {"key": "CHANNELUP", "icon": "mdi:arrow-up"},
-                "channel_down": {"key": "CHANNELDOWN", "icon": "mdi:arrow-down"},
-                "up": {"key": "UP", "icon": "mdi:chevron-up"},
-                "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
-                "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
-                "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
-                "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
-                "play": {"key": "PLAY", "icon": "mdi:play"},
-                "pause": {"key": "PAUSE", "icon": "mdi:pause"},
-                "menu": {"key": "MENU", "icon": "mdi:menu"},
-                "guide": {"key": "GUIDE", "icon": "mdi:television-guide"},
-                "exit": {"key": "EXIT", "icon": "mdi:close"},
-            };
-        }
-        else {
-            this.keys = {
-                "power": {"key": "KEY_POWER", "icon": "mdi:power"},
-                "volume_up": {"key": "KEY_VOLUP", "icon": "mdi:volume-plus"},
-                "volume_down": {"key": "KEY_VOLDOWN", "icon": "mdi:volume-minus"},
-                "volume_mute": {"key": "KEY_MUTE", "icon": "mdi:volume-mute"},
-                "return": {"key": "KEY_RETURN", "icon": "mdi:arrow-left"},
-                "source": {"key": "KEY_SOURCE", "icon": "mdi:video-input-hdmi"},
-                "info": {"key": "KEY_INFO", "icon": "mdi:television-guide"},
-                "home": {"key": "KEY_HOME", "icon": "mdi:home"},
-                "channel_up": {"key": "KEY_CHUP", "icon": "mdi:arrow-up"},
-                "channel_down": {"key": "KEY_CHDOWN", "icon": "mdi:arrow-down"},
-                "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
-                "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
-                "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
-                "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
-                "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
-                "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
-                "play": {"key": "KEY_PLAY", "icon": "mdi:play"},
-                "pause": {"key": "KEY_PAUSE", "icon": "mdi:pause"},
-                "fast_forward": {"key": "KEY_FF", "icon": "mdi:fast-forward"},
-            };
+        switch(config.platform) {
+            case "androidtv": {
+                this.keys = {
+                    "power": {"key": "POWER", "icon": "mdi:power"},
+                    "volume_up": {"key": "VOLUME_UP", "icon": "mdi:volume-plus"},
+                    "volume_down": {"key": "VOLUME_DOWN", "icon": "mdi:volume-minus"},
+                    "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
+                    "return": {"key": "BACK", "icon": "mdi:arrow-left"},
+                    "home": {"key": "HOME", "icon": "mdi:home"},
+                    "up": {"key": "UP", "icon": "mdi:chevron-up"},
+                    "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
+                    "enter": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
+                    "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
+                    "rewind": {"key": "REWIND", "icon": "mdi:rewind"},
+                    "play": {"key": "RESUME", "icon": "mdi:play"},
+                    "fast_forward": {"key": "FAST_FORWARD", "icon": "mdi:fast-forward"},
+                    "menu": {"key": "MENU", "icon": "mdi:menu"},
+                    "settings": {"key": "SETTINGS", "icon": "mdi:cog"},
+                };
+                break;
+            }
+            case "webostv": {
+                this.keys = {
+                    "volume_up": {"key": "VOLUMEUP", "icon": "mdi:volume-plus"},
+                    "volume_down": {"key": "VOLUMEDOWN", "icon": "mdi:volume-minus"},
+                    "volume_mute": {"key": "MUTE", "icon": "mdi:volume-mute"},
+                    "return": {"key": "BACK", "icon": "mdi:arrow-left"},
+                    "info": {"key": "INFO", "icon": "mdi:information"},
+                    "home": {"key": "HOME", "icon": "mdi:home"},
+                    "channel_up": {"key": "CHANNELUP", "icon": "mdi:arrow-up"},
+                    "channel_down": {"key": "CHANNELDOWN", "icon": "mdi:arrow-down"},
+                    "up": {"key": "UP", "icon": "mdi:chevron-up"},
+                    "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
+                    "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
+                    "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
+                    "play": {"key": "PLAY", "icon": "mdi:play"},
+                    "pause": {"key": "PAUSE", "icon": "mdi:pause"},
+                    "menu": {"key": "MENU", "icon": "mdi:menu"},
+                    "guide": {"key": "GUIDE", "icon": "mdi:television-guide"},
+                    "exit": {"key": "EXIT", "icon": "mdi:close"},
+                };
+                break;
+            }
+            case "roku": {
+                let remote_entity = !config.remote_entity ? "remote." + config.entity.split(".")[1] : config.remote_entity;
+                this.keys = {
+                    "power": {"icon": "mdi:power", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "power"}},
+                    "volume_up": {"icon": "mdi:volume-plus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "volume_up"}},
+                    "volume_down": {"icon": "mdi:volume-minus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "volume_down"}},
+                    "volume_mute": {"icon": "mdi:volume-mute", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "volume_mute"}},
+                    "return": {"icon": "mdi:arrow-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "back"}},
+                    "info": {"icon": "mdi:asterisk", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "info"}},
+                    "home": {"icon": "mdi:home", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "home"}},
+                    "channel_up": {"icon": "mdi:arrow-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "channel_up"}},
+                    "channel_down": {"icon": "mdi:arrow-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "channel_down"}},
+                    "up": {"icon": "mdi:chevron-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "up"}},
+                    "left": {"icon": "mdi:chevron-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "left"}},
+                    "enter": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "select"}},
+                    "right": {"icon": "mdi:chevron-right", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "right"}},
+                    "down": {"icon": "mdi:chevron-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "down"}},
+                    "rewind": {"icon": "mdi:rewind", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "reverse"}},
+                    "play": {"icon": "mdi:play-pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "play"}},
+                    "fast_forward": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "forward"}},
+                };
+                break;
+            }
+            case "samsungtv":
+            default: {
+                this.keys = {
+                    "power": {"key": "KEY_POWER", "icon": "mdi:power"},
+                    "volume_up": {"key": "KEY_VOLUP", "icon": "mdi:volume-plus"},
+                    "volume_down": {"key": "KEY_VOLDOWN", "icon": "mdi:volume-minus"},
+                    "volume_mute": {"key": "KEY_MUTE", "icon": "mdi:volume-mute"},
+                    "return": {"key": "KEY_RETURN", "icon": "mdi:arrow-left"},
+                    "source": {"key": "KEY_SOURCE", "icon": "mdi:video-input-hdmi"},
+                    "info": {"key": "KEY_INFO", "icon": "mdi:television-guide"},
+                    "home": {"key": "KEY_HOME", "icon": "mdi:home"},
+                    "channel_up": {"key": "KEY_CHUP", "icon": "mdi:arrow-up"},
+                    "channel_down": {"key": "KEY_CHDOWN", "icon": "mdi:arrow-down"},
+                    "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
+                    "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
+                    "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
+                    "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
+                    "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
+                    "play": {"key": "KEY_PLAY", "icon": "mdi:play"},
+                    "pause": {"key": "KEY_PAUSE", "icon": "mdi:pause"},
+                    "fast_forward": {"key": "KEY_FF", "icon": "mdi:fast-forward"},
+                };
+            }
         }
 
         this.custom_keys = config.custom_keys || {};
