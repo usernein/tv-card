@@ -27,21 +27,21 @@
 
 ## Options
 
-| Name | Type | Requirement | Description
-| ---- | ---- | ------- | -----------
-| type | string | **Required** | `custom:tv-card`
-| entity | string | **Required** | The `media_player` entity to control.
-| platform | string | **Optional** | Platform of `media_player`. Supported values: `samsungtv`, `androidtv`, `webostv`, `roku`. If empty, it will use the keycodes for `samsungtv`.
-| remote_entity | string | **Optional** | The remote entity that controls the Roku `media_player`. Defaults to `remote.{{entity_id}}`.
-| volume_entity | string | **Optional** | The `media_player` entity for volume control (working only with volume_row: `slider`). Defaults to the same in `entity`.
-| title | string | **Optional** | Card title for showing as header.
-| enable_double_click | boolean | **Optional** | Whether a double click on the touchpad should send the key in `double_click_keycode`. Defaults to `true`.
-| double_click_keycode | string | **Optional** | The key for double clicks on the touchpad. Defaults to `KEY_RETURN`
-| enable_button_feedback | boolean | **Optional** | Shall clicks on the buttons return a vibration feedback? Defaults to `true`.
-| enable_slider_feedback | boolean | **Optional** | Shall the volume slider return a vibration feedback when you slide through it? Defaults to `true`.
-| slider_config | object | **Optional** | Custom configuration for the volume slider. See [slider-card](https://github.com/AnthonMS/my-cards)
-| custom_keys | object | **Optional** | Custom keys for the remote control. Each item is an object that should have `icon` and at least one of the following properties: `key`, `source`, `service`.
-| custom_sources | object | **Optional** | Custom sources for the remote control. Same object as above, but letting you split keys and sources.
+| Name | Type | Requirement | Default |Description
+| ---- | ---- | ------- | ---- | -----------
+| type | string | **Required** | | `custom:tv-card`
+| entity | string | **Required** | | The `media_player` entity to control.
+| platform | string | **Optional** | `samsungtv` | Platform of `media_player`. Supported values: `samsungtv`, `androidtv`, `webostv`, `roku`
+| remote_entity | string | **Optional** | `remote.{{entity_id}}` | The remote entity that controls the Roku `media_player`
+| volume_entity | string | **Optional** | `entity` | The `media_player` entity for volume control (working only with volume_row: `slider`)
+| title | string | **Optional** | | Card title for showing as header.
+| enable_double_click | boolean | **Optional** | `true` | Whether a double click on the touchpad should send the key in `double_click_keycode`
+| double_click_keycode | string | **Optional** | `KEY_RETURN` | The key for double clicks on the touchpad. Defaults to `KEY_RETURN`
+| enable_button_feedback | boolean | **Optional** | `true` | Shall clicks on the buttons return a vibration feedback?
+| enable_slider_feedback | boolean | **Optional** | `true` | Shall the volume slider return a vibration feedback when you slide through it?
+| slider_config | object | **Optional** | | Custom configuration for the volume slider. See [slider-card](https://github.com/AnthonMS/my-cards)
+| custom_keys | object | **Optional** | | Custom keys for the remote control. Each item is an object that should have `icon` and at least one of the following properties: `key`, `source`, `service`.
+| custom_sources | object | **Optional** | | Custom sources for the remote control. Same object as above, but letting you split keys and sources.
 
 Using only these options you will get an empty card (or almost empty, if you set a title).
 In order to include the buttons, you need to specify in the config the rows you want and which buttons you want in it.
