@@ -125,6 +125,40 @@ class TVCardServices extends LitElement {
                 };
                 break;
             }
+            case "braviatv": {
+                let remote_entity = !config.remote_entity ? "remote." + config.entity.split(".")[1] : config.remote_entity;
+                this.keys = {
+                    "power": {"icon": "mdi:power", "service": "remote.toggle", "service_data": { "entity_id": remote_entity}},
+                    "volume_up": {"icon": "mdi:volume-plus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "VolumeUp"}},
+                    "volume_down": {"icon": "mdi:volume-minus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "VolumeDown"}},
+                    "volume_mute": {"icon": "mdi:volume-mute", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Mute"}},
+                    "return": {"icon": "mdi:arrow-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Return"}},
+                    "info": {"icon": "mdi:asterisk", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "GGuide"}},
+                    "home": {"icon": "mdi:home", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Home"}},
+                    "channel_up": {"icon": "mdi:arrow-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "ChannelUp"}},
+                    "channel_down": {"icon": "mdi:arrow-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "ChannelDown"}},
+                    "up": {"icon": "mdi:chevron-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Up"}},
+                    "left": {"icon": "mdi:chevron-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Left"}},
+                    "enter": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "DpadCenter"}},
+                    "right": {"icon": "mdi:chevron-right", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Right"}},
+                    "down": {"icon": "mdi:chevron-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Down"}},
+                    "rewind": {"icon": "mdi:rewind", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Rewind"}},
+                    "play": {"icon": "mdi:play-pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Play"}},
+                    "fast_forward": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Forward"}},
+                    "settings": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Options"}},
+                    "num-0": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num0"}},
+                    "num-1": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num1"}},
+                    "num-2": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num2"}},
+                    "num-3": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num3"}},
+                    "num-4": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num4"}},
+                    "num-5": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num5"}},
+                    "num-6": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num6"}},
+                    "num-7": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num7"}},
+                    "num-8": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num8"}},
+                    "num-9": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num9"}},
+                };
+                break;
+            }
             case "samsungtv":
             default: {
                 this.keys = {
