@@ -384,7 +384,7 @@ class TVCardServices extends LitElement {
 
     handleActionClick(e) {
         let action = e.currentTarget.action;
-        sendAction(action);
+        this.sendAction(action);
 
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
     }
