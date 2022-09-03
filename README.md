@@ -36,8 +36,8 @@
 | remote_entity | string | **Optional** | `remote.{{entity_id}}` | The remote entity that controls the Roku and Bravia `media_player`
 | volume_entity | string | **Optional** | `entity` | The `media_player` entity for volume control (working only with volume_row: `slider`)
 | title | string | **Optional** | | Card title for showing as header.
-| enable_double_click | boolean | **Optional** | `true` | Whether a double click on the touchpad should send the key in `double_click_keycode`
-| double_click_keycode | string | **Optional** | `KEY_RETURN` | The key for double clicks on the touchpad. Defaults to `KEY_RETURN`
+| enable_double_click | boolean | **Optional** | `true` | Whether a double click on the touchpad should send the key in `double_click_action`
+| double_click_action | string | **Optional** | `return` | The action for double clicks on the touchpad. Defaults to `return`
 | enable_button_feedback | boolean | **Optional** | `true` | Shall clicks on the buttons return a vibration feedback?
 | enable_slider_feedback | boolean | **Optional** | `true` | Shall the volume slider return a vibration feedback when you slide through it?
 | slider_config | object | **Optional** | | Custom configuration for the volume slider. See [slider-card](https://github.com/AnthonMS/my-cards)
