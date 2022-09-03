@@ -16,6 +16,7 @@
 - Supports [ollo69's SamsungTV Smart Component](https://github.com/ollo69/ha-samsungtv-smart)
 - Supports [LG webOS Smart TV](https://www.home-assistant.io/integrations/webostv/)
 - Supports [Android TV](https://www.home-assistant.io/integrations/androidtv/)
+- Supports [Sony Bravia TV](https://www.home-assistant.io/integrations/braviatv)
 - Much easier setup
 - Implements haptics feedback
 - Customizable layout, you can choose the order of the rows and buttons
