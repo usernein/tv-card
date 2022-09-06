@@ -148,6 +148,7 @@ class TVCardServices extends LitElement {
                     "pause": {"icon": "mdi:pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Pause"}},
                     "fast_forward": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Forward"}},
                     "settings": {"icon": "mdi:cog", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Options"}},
+                    "assistant": {"icon": "mdi:google-assistant", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Assistant"}},
                     "netflix": {"icon": "mdi:netflix", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Netflix"}},
                     "num-0": {"icon": "mdi:numeric-0", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num0"}},
                     "num-1": {"icon": "mdi:numeric-1", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num1"}},
