@@ -433,7 +433,7 @@ class TVCardServices extends LitElement {
             return html ``;
         }
 
-        const preset_rows = ["navigation_row","volume_row"]
+        const preset_rows = ["navigation_row","volume_row","numpad_row"]
 
         var content = [];
         Object.keys(this.rows).forEach((row_name) => {
@@ -481,7 +481,31 @@ class TVCardServices extends LitElement {
 						navigation_row = [touchpad];
 					}
 					content.push(...navigation_row);
-				}
+				} else if (row_name === "numpad_row") {
+                    let numpad_row = [
+						[
+							this.buildIconButton("num_1"),
+							this.buildIconButton("num_2"),
+							this.buildIconButton("num_3"),
+						],
+						[
+							this.buildIconButton("num_4"),
+							this.buildIconButton("num_5"),
+							this.buildIconButton("num_6"),
+						],
+						[
+							this.buildIconButton("num_7"),
+							this.buildIconButton("num_8"),
+							this.buildIconButton("num_9"),
+						],
+						[
+							this.buildIconButton("channel_down"),
+							this.buildIconButton("num_0"),
+							this.buildIconButton("channel_up"),
+						],
+					];
+                    content.push(...numpad_row);
+                }
 			} else {
 				if (!!row_actions) {
 					let row_content = this.buildButtonsFromActions(row_actions);
