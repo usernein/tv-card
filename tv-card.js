@@ -23,6 +23,20 @@ const keys = {
     "play": {"key": "KEY_PLAY", "icon": "mdi:play"},
     "pause": {"key": "KEY_PAUSE", "icon": "mdi:pause"},
     "fast_forward": {"key": "KEY_FF", "icon": "mdi:fast-forward"},
+    "digit1": {"key": "KEY_1", "icon": "mdi:numeric-1"},
+    "digit2": {"key": "KEY_2", "icon": "mdi:numeric-2"},
+    "digit3": {"key": "KEY_3", "icon": "mdi:numeric-3"},
+    "digit4": {"key": "KEY_4", "icon": "mdi:numeric-4"},
+    "digit5": {"key": "KEY_5", "icon": "mdi:numeric-5"},
+    "digit6": {"key": "KEY_6", "icon": "mdi:numeric-6"},
+    "digit7": {"key": "KEY_7", "icon": "mdi:numeric-1"},
+    "digit8": {"key": "KEY_8", "icon": "mdi:numeric-8"},
+    "digit9": {"key": "KEY_9", "icon": "mdi:numeric-9"},
+    "digit0": {"key": "KEY_0", "icon": "mdi:numeric-0"},
+    "redbutton": {"key": "KEY_RED", "icon": "mdi:alpha-r-box"},
+    "greenbutton": {"key": "KEY_GREEN", "icon": "mdi:alpha-g-box"},
+    "yellowbutton": {"key": "KEY_YELLOW", "icon": "mdi:alpha-y-box"},
+    "bluebutton": {"key": "KEY_BLUE", "icon": "mdi:alpha-b-box"},
 };
 
 const sources = {
@@ -302,7 +316,7 @@ class TVCardServices extends LitElement {
             return html ``;
         }
 
-        const row_names = ["power_row", "channel_row", "apps_row", "source_row", "volume_row", "media_control_row", "navigation_row"];
+        const row_names = ["power_row", "channel_row", "apps_row", "source_row", "volume_row", "media_control_row", "navigation_row", "digits_row", "first_digits_row", "second_digits_row", "third_digits_row", "fourth_digits_row","buttons_row"];
 
         var content = [];
         Object.keys(this._config).forEach((row_name) => {
@@ -343,6 +357,14 @@ class TVCardServices extends LitElement {
                         navigation_row = [touchpad];
                     }
                     content.push(...navigation_row);
+                } else if (row_name === "digits_row") {
+                    let digits_row = [];
+                    let first_row  = [this.buildIconButton("digit1"), this.buildIconButton("digit2"), this.buildIconButton("digit3")];
+                    let second_row = [this.buildIconButton("digit4"), this.buildIconButton("digit5"), this.buildIconButton("digit6")];
+                    let third_row  = [this.buildIconButton("digit7"), this.buildIconButton("digit8"), this.buildIconButton("digit9")];
+                    let fourth_row = [this.buildIconButton("digit0")];
+                    digits_row = [first_row, second_row, third_row, fourth_row];
+                    content.push(...digits_row);
                 } else {
                     let row_content = this.buildButtonsFromActions(row_actions);
                     content.push(row_content);
