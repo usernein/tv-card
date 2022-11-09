@@ -52,14 +52,14 @@ media_control_row:
   - fast_forward
 ```
 
-The available rows are `power_row`, `channel_row`, `apps_row`, `source_row` and `media_control_row`
-There also `volume_row` and `navigation_row`, but these requires a string as value.
+The available rows are `power_row`, `channel_row`, `apps_row`, `source_row`, `media_control_row`, `first_digits_row`, `second_digits_row`, `third_digits_row`, `fourth_digits_row`,`buttons_row`
+There also `volume_row`, `navigation_row` and  `digits_row`, but these requires a string as value.
 
 | Name | Type | Description
 | ---- | ---- | -------
 | volume_row | string | Can be either `slider` or `buttons`. This defines the mode you want for setting the volume (you'll see them soon below). You need to have [slider-card](https://github.com/AnthonMS/my-cards) installed in order to use `slider`.
 | navigation_row | string | Can be either `touchpad` or `buttons`. This defines the mode you want for navigating around your tv (you'll also see them soon below).
-
+| navigation_row | string | Can only be `buttons`.
 ## **Notice**
 
 This card uses `media_player.play_media` to send keys to the TV.
@@ -312,6 +312,31 @@ source_row:
 Result:
 
 <img src="assets/using_less.png" alt="less example" width="300"/>
+
+### Example 4
+
+Digits and color buttons added
+
+```yaml
+type: custom:tv-card
+entity: media_player.tv
+title: Example 4
+channel_row:
+  - channel_up
+  - channel_down
+volume_row: buttons
+navigation_row: buttons
+buttons_row:
+  - redbutton
+  - greenbutton
+  - yellowbutton
+  - bluebutton
+digits_row: buttons
+```
+
+Result:
+
+<img src="assets/digits_color_buttons.png" alt="digits and color buttons example" width="300"/>
 
 ### Extra
 
