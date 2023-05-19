@@ -27,6 +27,7 @@ class TVCardServices extends LitElement {
         this.custom_keys = {};
         this.custom_sources = {};
         this.custom_icons = {};
+        this.rows = {};
 
         this.holdtimer = null;
         this.holdaction = null;
@@ -69,6 +70,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
                     "rewind": {"key": "REWIND", "icon": "mdi:rewind"},
@@ -92,6 +94,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
                     "play": {"key": "PLAY", "icon": "mdi:play"},
@@ -117,11 +120,50 @@ class TVCardServices extends LitElement {
                     "up": {"icon": "mdi:chevron-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "up"}},
                     "left": {"icon": "mdi:chevron-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "left"}},
                     "enter": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "select"}},
+                    "enter_hold": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "select"}},
                     "right": {"icon": "mdi:chevron-right", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "right"}},
                     "down": {"icon": "mdi:chevron-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "down"}},
                     "rewind": {"icon": "mdi:rewind", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "reverse"}},
                     "play": {"icon": "mdi:play-pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "play"}},
                     "fast_forward": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "forward"}},
+                };
+                break;
+            }
+            case "braviatv": {
+                let remote_entity = !config.remote_entity ? "remote." + config.entity.split(".")[1] : config.remote_entity;
+                this.keys = {
+                    "power": {"icon": "mdi:power", "service": "remote.toggle", "service_data": { "entity_id": remote_entity}},
+                    "source": {"icon": "mdi:import", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Input"}},
+                    "volume_up": {"icon": "mdi:volume-plus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "VolumeUp"}},
+                    "volume_down": {"icon": "mdi:volume-minus", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "VolumeDown"}},
+                    "volume_mute": {"icon": "mdi:volume-mute", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Mute"}},
+                    "return": {"icon": "mdi:arrow-u-left-top", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Return"}},
+                    "info": {"icon": "mdi:asterisk", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "GGuide"}},
+                    "home": {"icon": "mdi:home", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Home"}},
+                    "channel_up": {"icon": "mdi:arrow-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "ChannelUp"}},
+                    "channel_down": {"icon": "mdi:arrow-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "ChannelDown"}},
+                    "up": {"icon": "mdi:chevron-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Up"}},
+                    "left": {"icon": "mdi:chevron-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Left"}},
+                    "enter": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "DpadCenter"}},
+                    "right": {"icon": "mdi:chevron-right", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Right"}},
+                    "down": {"icon": "mdi:chevron-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Down"}},
+                    "rewind": {"icon": "mdi:rewind", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Rewind"}},
+                    "play": {"icon": "mdi:play-pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Play"}},
+                    "pause": {"icon": "mdi:pause", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Pause"}},
+                    "fast_forward": {"icon": "mdi:fast-forward", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Forward"}},
+                    "settings": {"icon": "mdi:cog", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Options"}},
+                    "assistant": {"icon": "mdi:google-assistant", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Assistant"}},
+                    "netflix": {"icon": "mdi:netflix", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Netflix"}},
+                    "num_0": {"icon": "mdi:numeric-0", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num0"}},
+                    "num_1": {"icon": "mdi:numeric-1", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num1"}},
+                    "num_2": {"icon": "mdi:numeric-2", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num2"}},
+                    "num_3": {"icon": "mdi:numeric-3", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num3"}},
+                    "num_4": {"icon": "mdi:numeric-4", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num4"}},
+                    "num_5": {"icon": "mdi:numeric-5", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num5"}},
+                    "num_6": {"icon": "mdi:numeric-6", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num6"}},
+                    "num_7": {"icon": "mdi:numeric-7", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num7"}},
+                    "num_8": {"icon": "mdi:numeric-8", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num8"}},
+                    "num_9": {"icon": "mdi:numeric-9", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "Num9"}},
                 };
                 break;
             }
@@ -141,6 +183,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
                     "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
@@ -154,6 +197,7 @@ class TVCardServices extends LitElement {
         this.custom_keys = config.custom_keys || {};
         this.custom_sources = config.custom_sources || {};
         this.custom_icons = config.custom_icons || {};
+        this.rows = config.rows || {};
         
         this.loadCardHelpers();
         this.renderVolumeSlider();
@@ -239,6 +283,21 @@ class TVCardServices extends LitElement {
         }
     }
 
+    sendAction(action){
+        let info = this.custom_keys[action] || this.custom_sources[action] || this.keys[action] || sources[action];
+
+        if (info.key) {
+            this.sendKey(info.key);
+        }
+        else if (info.source) {
+            this.changeSource(info.source);
+        }
+        else if (info.service) {
+            const [domain, service] = info.service.split(".", 2);
+            this._hass.callService(domain, service, info.service_data);
+        }
+    }
+
     changeSource(source) {
         let entity_id = this._config.entity;
 
@@ -252,7 +311,7 @@ class TVCardServices extends LitElement {
     onClick(event) {
         event.stopImmediatePropagation();
         let click_action = () => {
-            this.sendKey(this.keys.enter.key);
+            this.sendAction("enter")
             if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
         };  
         if (this._config.enable_double_click) {
@@ -270,21 +329,26 @@ class TVCardServices extends LitElement {
         clearTimeout(this.timer);
         this.timer = null;
 
-        this.sendKey(this._config.double_click_keycode ? this._config.double_click_keycode : this.keys.return.key);
+        this.sendAction(this._config.double_click_action ? this._config.double_click_action : "return")
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "success");
     }
 
     onTouchStart(event) {
         event.stopImmediatePropagation();
 
-        this.holdaction = this.keys.enter.key;
+        this.holdaction = "enter_hold";
         this.holdtimer = setTimeout(() => {
-
-            //hold
-            this.holdinterval = setInterval(() => {
-                this.sendKey(this.holdaction);
+            if(this.holdaction == "enter_hold"){
+                this.sendAction(this.holdaction)
                 if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
-            }, 200);
+            }
+            else {
+                //hold
+                this.holdinterval = setInterval(() => {
+                    this.sendAction(this.holdaction)
+                    if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
+                }, 300);
+            }
         }, 700);
         window.initialX = event.touches[0].clientX;
         window.initialY = event.touches[0].clientY;
@@ -315,15 +379,15 @@ class TVCardServices extends LitElement {
         if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
 
-            let key = diffX > 0 ? this.keys.left.key : this.keys.right.key;
-            this.holdaction = key;
-            this.sendKey(key);
+            let action = diffX > 0 ? "left" : "right";
+            this.holdaction = action;
+            this.sendAction(action);
         } else {
             // sliding vertically
-            let key = diffY > 0 ? this.keys.up.key : this.keys.down.key;
-            this.holdaction = key;
+            let action = diffY > 0 ? "up" : "down";
+            this.holdaction = action;
 
-            this.sendKey(key);
+            this.sendAction(action);
         }
 
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "selection");
@@ -333,19 +397,7 @@ class TVCardServices extends LitElement {
 
     handleActionClick(e) {
         let action = e.currentTarget.action;
-
-        let info = this.custom_keys[action] || this.custom_sources[action] || this.keys[action] || sources[action];
-
-        if (info.key) {
-            this.sendKey(info.key);
-        }
-        else if (info.source) {
-            this.changeSource(info.source);
-        }
-        else if (info.service) {
-            const [domain, service] = info.service.split(".", 2);
-            this._hass.callService(domain, service, info.service_data);
-        }
+        this.sendAction(action);
 
         if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
     }
@@ -390,53 +442,88 @@ class TVCardServices extends LitElement {
             return html ``;
         }
 
-        const row_names = ["power_row", "channel_row", "apps_row", "source_row", "volume_row", "media_control_row", "navigation_row"];
+        const preset_rows = ["navigation_row","numpad_row","volume_row"]
 
         var content = [];
-        Object.keys(this._config).forEach((row_name) => {
-            if (row_names.includes(row_name)) {
-                let row_actions = this._config[row_name];
+        Object.keys(this.rows).forEach((row_name) => {
+			let row_actions = this.rows[row_name];
 
-                if (row_name === "volume_row") {
-                    let volume_row = [];
-                    if (this._config.volume_row == "buttons") {
-                        volume_row = [
-                            this.buildIconButton("volume_down"),
-                            this.buildIconButton("volume_mute"),
-                            this.buildIconButton("volume_up")
-                        ];
-                    } else if (this._config.volume_row == "slider") {
-                        volume_row = [this.volume_slider];
-                    }
-                    content.push(volume_row);
-                } else if (row_name === "navigation_row") {
-                    let navigation_row = [];
+			if (preset_rows.includes(row_name)) {
+				if (row_name === "volume_row") {
+					let volume_row = [];
+					if (this.rows.volume_row == "buttons") {
+						volume_row = [
+							this.buildIconButton("volume_down"),
+							this.buildIconButton("volume_mute"),
+							this.buildIconButton("volume_up"),
+						];
+					} else if (this.rows.volume_row == "slider") {
+						volume_row = [this.volume_slider];
+					}
+					content.push(volume_row);
+				} else if (row_name === "navigation_row") {
+					let navigation_row = [];
 
-                    if (this._config.navigation_row == "buttons") {
-                        let up_row = [this.buildIconButton("up")];
-                        let middle_row = [this.buildIconButton("left"), this.buildIconButton("enter"), this.buildIconButton("right")];
-                        let down_row = [this.buildIconButton("down")];
-                        navigation_row = [up_row, middle_row, down_row];
-                    } else if (this._config.navigation_row == "touchpad") {
-                        var touchpad = [html `
-                            <toucharea
-                                id="toucharea"
-                                @click="${this.onClick}"
-                                @dblclick="${this.onDoubleClick}"
-                                @touchstart="${this.onTouchStart}"
-                                @touchmove="${this.onTouchMove}"
-                                @touchend="${this.onTouchEnd}">
-                            </toucharea>
-                        `];
-                        navigation_row = [touchpad];
-                    }
-                    content.push(...navigation_row);
-                } else {
-                    let row_content = this.buildButtonsFromActions(row_actions);
-                    content.push(row_content);
-                }
-            }
-        });
+					if (this.rows.navigation_row == "buttons") {
+						let up_row = [this.buildIconButton("up")];
+						let middle_row = [
+							this.buildIconButton("left"),
+							this.buildIconButton("enter"),
+							this.buildIconButton("right"),
+						];
+						let down_row = [this.buildIconButton("down")];
+						navigation_row = [up_row, middle_row, down_row];
+					} else if (this.rows.navigation_row == "touchpad") {
+						var touchpad = [
+							html`
+								<toucharea
+									id="toucharea"
+									@click="${this.onClick}"
+									@dblclick="${this.onDoubleClick}"
+									@touchstart="${this.onTouchStart}"
+									@touchmove="${this.onTouchMove}"
+									@touchend="${this.onTouchEnd}"
+								>
+								</toucharea>
+							`,
+						];
+						navigation_row = [touchpad];
+					}
+					content.push(...navigation_row);
+				} else if (row_name === "numpad_row") {
+					if (this.rows.numpad_row == true) {
+						let numpad_row = [
+							[
+								this.buildIconButton("num_1"),
+								this.buildIconButton("num_2"),
+								this.buildIconButton("num_3"),
+							],
+							[
+								this.buildIconButton("num_4"),
+								this.buildIconButton("num_5"),
+								this.buildIconButton("num_6"),
+							],
+							[
+								this.buildIconButton("num_7"),
+								this.buildIconButton("num_8"),
+								this.buildIconButton("num_9"),
+							],
+							[
+								this.buildIconButton("channel_down"),
+								this.buildIconButton("num_0"),
+								this.buildIconButton("channel_up"),
+							],
+						];
+						content.push(...numpad_row);
+					}
+				}
+			} else {
+				if (!!row_actions) {
+					let row_content = this.buildButtonsFromActions(row_actions);
+					content.push(row_content);
+				}
+			}
+		});
 
         content = content.map(this.buildRow);
 
@@ -460,6 +547,9 @@ class TVCardServices extends LitElement {
                     height: 64px;
                     cursor: pointer;
                     --mdc-icon-size: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
                 .row {
                     display: flex;
