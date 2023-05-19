@@ -338,12 +338,17 @@ class TVCardServices extends LitElement {
 
         this.holdaction = "enter_hold";
         this.holdtimer = setTimeout(() => {
-
-            //hold
-            this.holdinterval = setInterval(() => {
+            if(this.holdaction == "enter_hold"){
                 this.sendAction(this.holdaction)
                 if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
-            }, 300);
+            }
+            else {
+                //hold
+                this.holdinterval = setInterval(() => {
+                    this.sendAction(this.holdaction)
+                    if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
+                }, 300);
+            }
         }, 700);
         window.initialX = event.touches[0].clientX;
         window.initialY = event.touches[0].clientY;
