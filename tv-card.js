@@ -70,6 +70,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "CENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
                     "rewind": {"key": "REWIND", "icon": "mdi:rewind"},
@@ -93,6 +94,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "ENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "DOWN", "icon": "mdi:chevron-down"},
                     "play": {"key": "PLAY", "icon": "mdi:play"},
@@ -118,6 +120,7 @@ class TVCardServices extends LitElement {
                     "up": {"icon": "mdi:chevron-up", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "up"}},
                     "left": {"icon": "mdi:chevron-left", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "left"}},
                     "enter": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "select"}},
+                    "enter_hold": {"icon": "mdi:checkbox-blank-circle", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "select"}},
                     "right": {"icon": "mdi:chevron-right", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "right"}},
                     "down": {"icon": "mdi:chevron-down", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "down"}},
                     "rewind": {"icon": "mdi:rewind", "service": "remote.send_command", "service_data": { "entity_id": remote_entity, "command": "reverse"}},
@@ -180,6 +183,7 @@ class TVCardServices extends LitElement {
                     "up": {"key": "KEY_UP", "icon": "mdi:chevron-up"},
                     "left": {"key": "KEY_LEFT", "icon": "mdi:chevron-left"},
                     "enter": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
+                    "enter_hold": {"key": "KEY_ENTER", "icon": "mdi:checkbox-blank-circle"},
                     "right": {"key": "KEY_RIGHT", "icon": "mdi:chevron-right"},
                     "down": {"key": "KEY_DOWN", "icon": "mdi:chevron-down"},
                     "rewind": {"key": "KEY_REWIND", "icon": "mdi:rewind"},
@@ -332,14 +336,14 @@ class TVCardServices extends LitElement {
     onTouchStart(event) {
         event.stopImmediatePropagation();
 
-        this.holdaction = "enter";
+        this.holdaction = "enter_hold";
         this.holdtimer = setTimeout(() => {
 
             //hold
             this.holdinterval = setInterval(() => {
                 this.sendAction(this.holdaction)
                 if (this._config.enable_button_feedback === undefined || this._config.enable_button_feedback) fireEvent(window, "haptic", "light");
-            }, 200);
+            }, 300);
         }, 700);
         window.initialX = event.touches[0].clientX;
         window.initialY = event.touches[0].clientY;
